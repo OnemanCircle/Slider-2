@@ -34,3 +34,22 @@ document.querySelector('.prev-btn').addEventListener('click', () => {
 
 // Load initial image
 updateGallery();
+
+// Create a new div for the background
+const backgroundDiv = document.createElement('div');
+
+// Style the background div
+backgroundDiv.style.position = 'absolute';
+backgroundDiv.style.top = '0';
+backgroundDiv.style.left = '0';
+backgroundDiv.style.width = '100%';
+backgroundDiv.style.height = '100%';
+backgroundDiv.style.backgroundImage = "url('images/background.jpg')"; // Use the uploaded background image path
+backgroundDiv.style.backgroundRepeat = 'no-repeat';
+backgroundDiv.style.backgroundPosition = 'center center';
+backgroundDiv.style.backgroundSize = 'cover';
+backgroundDiv.style.zIndex = '-1'; // Position it behind other content
+backgroundDiv.style.filter = 'blur(10px)'; // Optional: Adds a blur effect to the background
+
+// Append the background div to the body
+document.body.appendChild(backgroundDiv);
