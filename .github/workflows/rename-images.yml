@@ -1,0 +1,53 @@
+name: Rename Images Sequentially
+
+on:
+  workflow_dispatch:
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get the highest numbered .jpg file
+        id: get_last_number
+        run: |
+          # Find the highest numbered .jpg file
+          highest=$(ls images/*.jpg | sed 's/[^0-9]*[0-9]*\.jpg/\1/' | sort -n | tail -n 1)
+          echo "Last image number: $highest"
+          echo "::set-output name=last_number::$highest"
+
+      - name: Rename .jpg files in /images
+        run: |
+          # Get the last image number from the previous step
+          last_number=${{ steps.get_last_number.outputs.last_number }}
+          # Set the starting point for renaming
+          if [ -z "$last_number" ]; then
+            last_number=0  # If no images exist yet, start from 0
+          fi
+          
+          # Initialize counter for renaming
+          i=$((last_number + 1))
+
+          # Navigate to the images folder
+          cd images
+          
+          # Loop through all jpg files and rename them sequentially
+          for file in *.jpg; do
+            new_name="${i}.jpg"
+            # Only rename if the file name is different
+            if [ "$file" != "$new_name" ]; then
+              mv "$file" "$new_name"
+            fi
+            i=$((i + 1))  # Increment counter
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add images/
+          git commit -m "Renamed images to sequential numbers" || echo "No changes to commit"
+          git push
