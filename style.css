@@ -1,0 +1,107 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Gallery Container */
+#gallery-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+/* Image Container */
+#image-container {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Slider Styling */
+.image-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-image {
+    width: 70%;
+    height: auto;
+    transition: transform 0.6s ease-in-out;
+    filter: brightness(1.2) blur(0);
+    box-shadow: 0 0 20px 5px skyblue;
+}
+
+.next-image {
+    width: 9%;
+    height: auto;
+    filter: brightness(1.2) blur(0);
+    box-shadow: 0 0 10px 5px green;
+    opacity: 0.6;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("images/1.jpg") no-repeat center center;
+    background-size: cover;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+/* Navigation Buttons */
+#navigation {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+button {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 2rem;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Glowing Animation */
+@keyframes glowing {
+    0% { box-shadow: 0 0 20px 5px skyblue; }
+    50% { box-shadow: 0 0 25px 10px skyblue; }
+    100% { box-shadow: 0 0 20px 5px skyblue; }
+}
+
+.main-image:hover {
+    animation: glowing 1.5s infinite;
+}
