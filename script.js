@@ -1,7 +1,7 @@
 const images = [];
 
 // Generate paths for all 100 images
-for (let i = 1; i <= 100; i++) {
+for (let i = 1; i <=200; i++) {
     images.push(`images/${i}.jpg`);
 }
 
@@ -22,14 +22,14 @@ document.querySelector('.next-btn').addEventListener('click', () => {
     currentIndex = (currentIndex + 1) % images.length;
     updateGallery();
     mainImage.style.transform = 'scale(1.05)';
-    setTimeout(() => mainImage.style.transform = 'scale(1)', 600);
+    setTimeout(() => mainImage.style.transform = 'scale(1)', 1600);
 });
 
 document.querySelector('.prev-btn').addEventListener('click', () => {
     currentIndex = (currentIndex - 1 + images.length) % images.length;
     updateGallery();
     mainImage.style.transform = 'scale(1.05)';
-    setTimeout(() => mainImage.style.transform = 'scale(1)', 600);
+    setTimeout(() => mainImage.style.transform = 'scale(1)', 1600);
 });
 
 // Load initial image
